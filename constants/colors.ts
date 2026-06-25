@@ -1,0 +1,28 @@
+export const Colors = {
+  primary: '#1E88FF',
+  primaryLight: '#6EC6FF',
+  primaryDark: '#1565C0',
+  background: '#F7FBFF',
+  backgroundGradientEnd: '#D6EEFF',
+  surface: '#FFFFFF',
+  success: '#34C759',
+  warning: '#FF9500',
+  error: '#FF3B30',
+  textPrimary: '#1A1A2E',
+  textSecondary: '#6B7280',
+  textTertiary: '#9CA3AF',
+  border: '#E5E7EB',
+  ringTrack: '#E3F2FD',
+  streakOrange: '#FF6B35',
+  xpGold: '#FFB800',
+
+  // Quick-add button colors
+  add250Bg: '#E3F2FD',
+  add250Icon: '#1E88FF',
+  add500Bg: '#E0F7FA',
+  add500Icon: '#00ACC1',
+  add750Bg: '#EDE7F6',
+  add750Icon: '#7B1FA2',
+  add1000Bg: '#FFF3E0',
+  add1000Icon: '#FF6D00',
+} as const;

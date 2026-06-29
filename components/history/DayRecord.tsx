@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { DailyRecord } from '../../types';
 import { ProgressBar } from '../ui/ProgressBar';
@@ -57,16 +59,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 1,
   },
-  dropIcon: { fontSize: 24 },
+  dropIcon: { fontSize: fs(24) },
   main: { flex: 1, gap: 6 },
   topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  date: { fontSize: 14, fontWeight: '600', color: Colors.textPrimary },
+  date: { fontSize: fs(14), fontWeight: '600', color: Colors.textPrimary },
   badge: {
     borderRadius: BorderRadius.pill,
     paddingHorizontal: 8,
     paddingVertical: 2,
   },
-  pct: { fontSize: 12, fontWeight: '700' },
+  pct: { fontSize: fs(12), fontWeight: '700' },
   bar: { width: '100%' },
-  sub: { fontSize: 12, color: Colors.textSecondary },
+  sub: { fontSize: fs(12), color: Colors.textSecondary },
 });

@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Card } from '../ui/Card';
@@ -73,13 +75,13 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   avatarText: {
-    fontSize: 28,
+    fontSize: fs(28),
     fontWeight: '800',
     color: '#fff',
   },
   info: { flex: 1, gap: 5 },
-  name: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
-  tagline: { fontSize: 12.5, color: Colors.textSecondary },
+  name: { fontSize: fs(20), fontWeight: '800', color: Colors.textPrimary },
+  tagline: { fontSize: fs(12.5), color: Colors.textSecondary },
   badges: { flexDirection: 'row', gap: 8, flexWrap: 'wrap', marginTop: 6 },
   badge: {
     flexDirection: 'row',
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   xpBadge: { backgroundColor: `${Colors.xpGold}18` },
-  badgeIcon: { fontSize: 12 },
-  badgeText: { fontSize: 11, fontWeight: '700', color: Colors.streakOrange },
+  badgeIcon: { fontSize: fs(12) },
+  badgeText: { fontSize: fs(11), fontWeight: '700', color: Colors.streakOrange },
   xpBadgeText: { color: Colors.xpGold },
 });

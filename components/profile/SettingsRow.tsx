@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Toggle } from '../ui/Toggle';
 import { Colors } from '../../constants/colors';
@@ -74,11 +76,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: { fontSize: 18 },
+  icon: { fontSize: fs(18) },
   textSection: { flex: 1, gap: 2 },
-  title: { fontSize: 14, fontWeight: '600', color: Colors.textPrimary },
-  description: { fontSize: 12, color: Colors.textSecondary },
+  title: { fontSize: fs(14), fontWeight: '600', color: Colors.textPrimary },
+  description: { fontSize: fs(12), color: Colors.textSecondary },
   right: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  value: { fontSize: 13, color: Colors.textSecondary },
-  chevron: { fontSize: 20, color: Colors.textTertiary, marginTop: -2 },
+  value: { fontSize: fs(13), color: Colors.textSecondary },
+  chevron: { fontSize: fs(20), color: Colors.textTertiary, marginTop: -2 },
 });

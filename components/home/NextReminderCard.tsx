@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { Card } from '../ui/Card';
 import { Colors } from '../../constants/colors';
@@ -32,9 +34,9 @@ export function NextReminderCard({ nextHour, enabled }: Props) {
 const styles = StyleSheet.create({
   card: { flex: 1 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  icon: { fontSize: 28 },
+  icon: { fontSize: fs(28) },
   info: { gap: 1 },
-  label: { fontSize: 11, color: Colors.textSecondary },
-  value: { fontSize: 14, fontWeight: '700', color: Colors.primary },
-  sub: { fontSize: 11, color: Colors.textSecondary },
+  label: { fontSize: fs(11), color: Colors.textSecondary },
+  value: { fontSize: fs(14), fontWeight: '700', color: Colors.primary },
+  sub: { fontSize: fs(11), color: Colors.textSecondary },
 });

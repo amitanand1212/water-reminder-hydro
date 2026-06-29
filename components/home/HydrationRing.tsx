@@ -4,6 +4,7 @@ import { ProgressRing } from '../ui/ProgressRing';
 import { DropletIcon } from '../ui/Icons';
 import { Colors } from '../../constants/colors';
 import { mlToLitres, percentComplete } from '../../utils/calculations';
+import { fs } from '../../utils/responsive';
 
 interface Props {
   totalMl: number;
@@ -37,37 +38,37 @@ export function HydrationRing({ totalMl, goalMl, size = 230 }: Props) {
 const styles = StyleSheet.create({
   center: { alignItems: 'center' },
   percent: {
-    fontSize: 50,
+    fontSize: fs(50),
     fontWeight: '800',
     color: Colors.textPrimary,
-    lineHeight: 56,
+    lineHeight: fs(56),
   },
   percentSign: {
-    fontSize: 24,
+    fontSize: fs(24),
     fontWeight: '700',
     color: Colors.textPrimary,
   },
   intake: {
-    fontSize: 20,
+    fontSize: fs(20),
     marginTop: 2,
   },
   current: {
     fontWeight: '800',
     color: Colors.primary,
-    fontSize: 20,
+    fontSize: fs(20),
   },
   separator: {
     color: Colors.textTertiary,
-    fontSize: 18,
+    fontSize: fs(18),
     fontWeight: '600',
   },
   label: {
-    fontSize: 13,
+    fontSize: fs(13),
     color: Colors.textSecondary,
     marginTop: 6,
   },
   goalValue: {
-    fontSize: 13,
+    fontSize: fs(13),
     color: Colors.primary,
     fontWeight: '700',
   },

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, StyleSheet, ScrollView, Image, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { useHydrationStore } from '../../store/hydrationStore';
@@ -15,8 +15,20 @@ import { Spacing } from '../../constants/spacing';
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
+  const { width: winW } = useWindowDimensions();
   const { user, streak, settings, getTodayRecord } = useHydrationStore();
   const todayRecord = getTodayRecord();
+
+  // Ring + mascot sit side by side. At design size their combined footprint is
+  // ~410dp, which only fits on wide screens — derive a fit factor from the
+  // available width (content has Spacing.md padding each side) so the row never
+  // overflows on narrow phones, but never grows past the original design size.
+  const heroFit = Math.min(1, (winW - Spacing.md * 2) / 410);
+  const ringSize = Math.round(210 * heroFit);
+  const mascotW = Math.round(220 * heroFit);
+  const mascotH = Math.round((mascotW * 314) / 220);
+  const mascotOverlap = Math.round(28 * heroFit);
+  const mascotDrop = Math.round(10 * heroFit);
 
   const nextHour = useMemo(() => {
     const now = new Date().getHours();
@@ -45,7 +57,7 @@ export default function HomeScreen() {
           />
 
           {/* Ring + Mascot side by side */}
-          <View style={styles.hero}>
+          <View style={[styles.hero, { minHeight: mascotH }]}>
             {/* Floating drops decoration */}
             <View style={styles.drop1}>
               <DropletIcon size={20} color={Colors.primaryLight} />
@@ -57,11 +69,16 @@ export default function HomeScreen() {
             <HydrationRing
               totalMl={todayRecord.totalMl}
               goalMl={todayRecord.goalMl}
-              size={210}
+              size={ringSize}
             />
             <Image
               source={require('../../assets/mascot-drinking.png')}
-              style={styles.mascotImage}
+              style={{
+                width: mascotW,
+                height: mascotH,
+                marginLeft: -mascotOverlap,
+                marginBottom: -mascotDrop,
+              }}
               resizeMode="contain"
             />
           </View>
@@ -105,13 +122,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: Spacing.sm,
-    minHeight: 314,
-  },
-  mascotImage: {
-    width: 220,
-    height: 314,
-    marginLeft: -28,
-    marginBottom: -10,
   },
   drop1: { position: 'absolute', top: 10, left: 8 },
   drop2: { position: 'absolute', top: 34, left: 30 },

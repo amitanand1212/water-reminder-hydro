@@ -12,7 +12,7 @@
       "bundleIdentifier": "com.hydro.waterreminder"
     },
     "android": {
-      "package": "com.hydro.waterreminder",
+      "package": "com.wateralarms.waterreminder",
       "adaptiveIcon": {
         "backgroundColor": "#000000",
         "foregroundImage": "./assets/logo.png"

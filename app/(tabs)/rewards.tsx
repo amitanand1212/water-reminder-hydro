@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useHydrationStore } from '../../store/hydrationStore';
@@ -95,20 +97,20 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xl,
     gap: Spacing.md,
   },
-  headerTitle: { fontSize: 24, fontWeight: '800', color: Colors.textPrimary },
+  headerTitle: { fontSize: fs(24), fontWeight: '800', color: Colors.textPrimary },
   streakCard: {},
   streakRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
-  streakFire: { fontSize: 44 },
-  streakValue: { fontSize: 22, fontWeight: '800', color: Colors.streakOrange },
-  streakBest: { fontSize: 13, color: Colors.textSecondary },
-  sectionTitle: { fontSize: 18, fontWeight: '700', color: Colors.textPrimary, marginTop: 4 },
-  sectionSub: { fontSize: 12, color: Colors.textSecondary, marginTop: -8 },
+  streakFire: { fontSize: fs(44) },
+  streakValue: { fontSize: fs(22), fontWeight: '800', color: Colors.streakOrange },
+  streakBest: { fontSize: fs(13), color: Colors.textSecondary },
+  sectionTitle: { fontSize: fs(18), fontWeight: '700', color: Colors.textPrimary, marginTop: 4 },
+  sectionSub: { fontSize: fs(12), color: Colors.textSecondary, marginTop: -8 },
   badgeRow: { flexDirection: 'row', gap: Spacing.sm },
   milestoneCard: {},
   milestoneRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  milestoneIcon: { fontSize: 28 },
+  milestoneIcon: { fontSize: fs(28) },
   milestoneInfo: { flex: 1 },
-  milestoneLabel: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  milestoneDesc: { fontSize: 12, color: Colors.textSecondary },
-  milestoneProgress: { fontSize: 14, fontWeight: '700', color: Colors.primary },
+  milestoneLabel: { fontSize: fs(14), fontWeight: '700', color: Colors.textPrimary },
+  milestoneDesc: { fontSize: fs(12), color: Colors.textSecondary },
+  milestoneProgress: { fontSize: fs(14), fontWeight: '700', color: Colors.primary },
 });

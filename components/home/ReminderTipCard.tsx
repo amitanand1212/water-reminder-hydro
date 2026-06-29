@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { Card } from '../ui/Card';
 import { Colors } from '../../constants/colors';
@@ -67,9 +69,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
   },
   info: { flex: 1, gap: 1 },
-  label: { fontSize: 12, color: Colors.primary, fontWeight: '600' },
-  value: { fontSize: 16, fontWeight: '800', color: Colors.primary },
-  sub: { fontSize: 12, color: Colors.textSecondary },
-  tipLabel: { fontSize: 12, color: Colors.primary, fontWeight: '600' },
-  tipText: { fontSize: 12, color: Colors.textPrimary, lineHeight: 16 },
+  label: { fontSize: fs(12), color: Colors.primary, fontWeight: '600' },
+  value: { fontSize: fs(16), fontWeight: '800', color: Colors.primary },
+  sub: { fontSize: fs(12), color: Colors.textSecondary },
+  tipLabel: { fontSize: fs(12), color: Colors.primary, fontWeight: '600' },
+  tipText: { fontSize: fs(12), color: Colors.textPrimary, lineHeight: fs(16) },
 });

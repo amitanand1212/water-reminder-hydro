@@ -5,6 +5,7 @@ import { router } from 'expo-router';
 import { GradientBackground } from '../../components/ui/GradientBackground';
 import { Colors } from '../../constants/colors';
 import { Spacing, BorderRadius } from '../../constants/spacing';
+import { fs, imageSize } from '../../utils/responsive';
 
 const FEATURES = [
   { icon: '💧', title: 'Track Intake', text: 'Log every glass and watch your daily progress fill up.' },
@@ -67,14 +68,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
   },
   back: { alignSelf: 'flex-start', marginBottom: Spacing.sm },
-  backText: { color: Colors.primary, fontSize: 16, fontWeight: '600' },
+  backText: { color: Colors.primary, fontSize: fs(16), fontWeight: '600' },
   hero: { alignItems: 'center', marginBottom: Spacing.lg },
-  mascot: { width: 188, height: 225 },
-  appName: { fontSize: 28, fontWeight: '800', color: Colors.primary, marginTop: Spacing.xs },
-  version: { fontSize: 13, color: Colors.textTertiary, marginTop: 2 },
-  tagline: { fontSize: 14, color: Colors.textSecondary, marginTop: Spacing.xs },
+  mascot: { ...imageSize(188, 225) },
+  appName: { fontSize: fs(28), fontWeight: '800', color: Colors.primary, marginTop: Spacing.xs },
+  version: { fontSize: fs(13), color: Colors.textTertiary, marginTop: 2 },
+  tagline: { fontSize: fs(14), color: Colors.textSecondary, marginTop: Spacing.xs },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: fs(12),
     fontWeight: '700',
     color: Colors.textSecondary,
     textTransform: 'uppercase',
@@ -94,18 +95,18 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   featureRow: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
-  featureIcon: { fontSize: 24 },
+  featureIcon: { fontSize: fs(24) },
   featureTextWrap: { flex: 1, gap: 2 },
-  featureTitle: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary },
-  featureText: { fontSize: 13, color: Colors.textSecondary, lineHeight: 19 },
+  featureTitle: { fontSize: fs(15), fontWeight: '700', color: Colors.textPrimary },
+  featureText: { fontSize: fs(13), color: Colors.textSecondary, lineHeight: fs(19) },
   credit: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: Colors.textSecondary,
     textAlign: 'center',
     marginTop: Spacing.xl,
   },
   copyright: {
-    fontSize: 12,
+    fontSize: fs(12),
     color: Colors.textTertiary,
     textAlign: 'center',
     marginTop: Spacing.xs,

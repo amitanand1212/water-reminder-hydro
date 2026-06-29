@@ -8,6 +8,7 @@ import { FeatureCard } from '../../components/onboarding/FeatureCard';
 import { StepIndicator } from '../../components/onboarding/StepIndicator';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
+import { fs, imageSize } from '../../utils/responsive';
 
 export default function WelcomeScreen() {
   const insets = useSafeAreaInsets();
@@ -72,34 +73,33 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: Spacing.md,
   },
-  dropEmoji: { fontSize: 32 },
+  dropEmoji: { fontSize: fs(32) },
   logoText: {
-    fontSize: 28,
+    fontSize: fs(28),
     fontWeight: '800',
     color: Colors.primary,
     letterSpacing: -0.5,
   },
   title: {
-    fontSize: 28,
+    fontSize: fs(28),
     fontWeight: '800',
     color: Colors.textPrimary,
     textAlign: 'center',
-    lineHeight: 36,
+    lineHeight: fs(36),
     marginBottom: Spacing.sm,
   },
   subtitle: {
-    fontSize: 15,
+    fontSize: fs(15),
     color: Colors.textSecondary,
     textAlign: 'center',
-    lineHeight: 22,
+    lineHeight: fs(22),
     marginBottom: Spacing.lg,
   },
   mascotContainer: {
     marginBottom: Spacing.lg,
   },
   mascotImage: {
-    width: 275,
-    height: 325,
+    ...imageSize(275, 325),
   },
   featureRow: {
     flexDirection: 'row',

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useHydrationStore } from '../../store/hydrationStore';
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     gap: Spacing.md,
   },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  headerTitle: { fontSize: 24, fontWeight: '800', color: Colors.textPrimary },
+  headerTitle: { fontSize: fs(24), fontWeight: '800', color: Colors.textPrimary },
   tabs: {
     flexDirection: 'row',
     backgroundColor: Colors.border,
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tabActive: { backgroundColor: Colors.primary },
-  tabText: { fontSize: 13, fontWeight: '600', color: Colors.textSecondary },
+  tabText: { fontSize: fs(13), fontWeight: '600', color: Colors.textSecondary },
   tabTextActive: { color: '#fff' },
   chartSection: {
     backgroundColor: Colors.surface,
@@ -118,9 +120,9 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
   },
-  sectionTitle: { fontSize: 16, fontWeight: '700', color: Colors.textPrimary, marginBottom: Spacing.sm },
+  sectionTitle: { fontSize: fs(16), fontWeight: '700', color: Colors.textPrimary, marginBottom: Spacing.sm },
   dailyList: { gap: 0 },
   empty: { alignItems: 'center', paddingVertical: 40, gap: 12 },
-  emptyIcon: { fontSize: 48 },
-  emptyText: { fontSize: 14, color: Colors.textSecondary },
+  emptyIcon: { fontSize: fs(48) },
+  emptyText: { fontSize: fs(14), color: Colors.textSecondary },
 });

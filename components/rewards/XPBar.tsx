@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { ProgressBar } from '../ui/ProgressBar';
 import { xpToNextLevel, calculateLevel } from '../../utils/badges';
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 4,
   },
-  levelText: { color: '#fff', fontSize: 12, fontWeight: '800' },
-  xpText: { fontSize: 16, fontWeight: '700', color: Colors.textPrimary },
-  nextText: { fontSize: 11, color: Colors.textSecondary, textAlign: 'right' },
+  levelText: { color: '#fff', fontSize: fs(12), fontWeight: '800' },
+  xpText: { fontSize: fs(16), fontWeight: '700', color: Colors.textPrimary },
+  nextText: { fontSize: fs(11), color: Colors.textSecondary, textAlign: 'right' },
 });

@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import Animated, { useSharedValue, withTiming, useAnimatedStyle, Easing } from 'react-native-reanimated';
 import { Colors } from '../../constants/colors';
@@ -59,12 +61,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: Colors.textSecondary,
     fontWeight: '500',
   },
   value: {
-    fontSize: 16,
+    fontSize: fs(16),
     color: Colors.textPrimary,
     fontWeight: '700',
   },
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   goalLabel: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: Colors.textSecondary,
   },
   goalValue: {
@@ -85,12 +87,12 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   goalNumber: {
-    fontSize: 48,
+    fontSize: fs(48),
     fontWeight: '800',
     color: Colors.primary,
   },
   goalUnit: {
-    fontSize: 20,
+    fontSize: fs(20),
     fontWeight: '600',
     color: Colors.primary,
   },

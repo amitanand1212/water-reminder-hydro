@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { DailyRecord } from '../../types';
 import { formatShortDay } from '../../utils/dateHelpers';
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   pct: {
-    fontSize: 9,
+    fontSize: fs(9),
     color: Colors.textSecondary,
     fontWeight: '500',
     height: 14,
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   day: {
-    fontSize: 10,
+    fontSize: fs(10),
     color: Colors.textSecondary,
     fontWeight: '500',
   },

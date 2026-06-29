@@ -3,9 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
-  Dimensions,
   Image,
 } from 'react-native';
 import Animated, {
@@ -26,23 +24,25 @@ import { ProgressBar } from '../../components/ui/ProgressBar';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { mlToLitres, percentComplete } from '../../utils/calculations';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors } from '../../constants/colors';
 import { Spacing, BorderRadius } from '../../constants/spacing';
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+import { fs, imageSize } from '../../utils/responsive';
 
 type Phase = 0 | 1 | 2;
 
 export default function DrinkingModal() {
   const { amount: amountParam } = useLocalSearchParams<{ amount: string }>();
   const amount = parseInt(amountParam ?? '250', 10);
+  const insets = useSafeAreaInsets();
 
   const { getTodayRecord, addWater, streak, xp } = useHydrationStore();
   const todayRecord = getTodayRecord();
 
   const [phase, setPhase] = useState<Phase>(0);
   const [drinkProgress, setDrinkProgress] = useState(0);
-  const [waterAdded, setWaterAdded] = useState(false);
+  const savedRef = useRef(false);
+  const exitedRef = useRef(false);
 
   const currentPct = percentComplete(todayRecord.totalMl, todayRecord.goalMl);
   const newTotalMl = todayRecord.totalMl + amount;
@@ -76,6 +76,14 @@ export default function DrinkingModal() {
     }
     if (phase === 2) {
       statsOpacity.value = withDelay(300, withTiming(1, { duration: 600 }));
+      // Save the intake as soon as the success screen appears, then head Home
+      // automatically after 2.5s — tapping "Awesome!" is optional.
+      if (!savedRef.current) {
+        savedRef.current = true;
+        addWater(amount);
+      }
+      const timer = setTimeout(saveAndExit, 2500);
+      return () => clearTimeout(timer);
     }
   }, [phase]);
 
@@ -94,6 +102,8 @@ export default function DrinkingModal() {
   }));
 
   const handleClose = () => {
+    if (exitedRef.current) return;
+    exitedRef.current = true;
     router.back();
   };
 
@@ -101,10 +111,15 @@ export default function DrinkingModal() {
     setPhase(1);
   };
 
-  const handleAwesome = () => {
-    if (!waterAdded) {
+  // Save the intake (once) and return Home. Runs automatically 1s after the
+  // "Great Job" screen; the "Awesome!" button just triggers it sooner — so
+  // tapping is fully optional and the data is saved either way.
+  const saveAndExit = () => {
+    if (exitedRef.current) return;
+    exitedRef.current = true;
+    if (!savedRef.current) {
+      savedRef.current = true;
       addWater(amount);
-      setWaterAdded(true);
     }
     router.back();
     // After a positive moment, gently ask for a rating (self-gated by the
@@ -129,7 +144,7 @@ export default function DrinkingModal() {
       start={{ x: 0, y: 0 }}
       end={{ x: 0.2, y: 1 }}
     >
-      <SafeAreaView style={styles.safe}>
+      <View style={styles.safe}>
         {/* Floating bubbles */}
         {bubbles.map((b, i) => (
           <View
@@ -148,11 +163,21 @@ export default function DrinkingModal() {
         ))}
 
         {/* Close button */}
-        <TouchableOpacity style={styles.closeBtn} onPress={handleClose}>
+        <TouchableOpacity
+          style={[styles.closeBtn, { top: insets.top + Spacing.sm }]}
+          onPress={handleClose}
+        >
           <Text style={styles.closeText}>✕</Text>
         </TouchableOpacity>
 
-        <Animated.View style={[styles.container, containerStyle]}>
+        <Animated.ScrollView
+          style={[styles.scroll, containerStyle]}
+          contentContainerStyle={[
+            styles.scrollContent,
+            { paddingTop: insets.top + Spacing.xxl, paddingBottom: insets.bottom + Spacing.lg },
+          ]}
+          showsVerticalScrollIndicator={false}
+        >
           {phase === 0 && (
             <View style={styles.phaseContainer}>
               <Text style={styles.phaseTitle}>Hydration Time 💧</Text>
@@ -224,7 +249,7 @@ export default function DrinkingModal() {
                       {
                         top: `${10 + i * 12}%`,
                         left: `${5 + (i % 3) * 35}%`,
-                        fontSize: 18 + (i % 3) * 6,
+                        fontSize: fs(18) + (i % 3) * 6,
                         opacity: 0.7,
                       } as any,
                     ]}
@@ -254,7 +279,7 @@ export default function DrinkingModal() {
 
                 <View style={styles.progressSection}>
                   <ProgressRing percentage={newPct} size={80} strokeWidth={8}>
-                    <Text style={{ fontSize: 14, fontWeight: '800', color: Colors.primary }}>{newPct}%</Text>
+                    <Text style={{ fontSize: fs(14), fontWeight: '800', color: Colors.primary }}>{newPct}%</Text>
                   </ProgressRing>
                   <View style={styles.progressText}>
                     <Text style={styles.progressLabel}>Today's Progress</Text>
@@ -288,11 +313,11 @@ export default function DrinkingModal() {
                 </View>
               </Animated.View>
 
-              <Button label="Awesome! →" onPress={handleAwesome} style={styles.cta} />
+              <Button label="Awesome! →" onPress={saveAndExit} style={styles.cta} />
             </View>
           )}
-        </Animated.View>
-      </SafeAreaView>
+        </Animated.ScrollView>
+      </View>
     </LinearGradient>
   );
 }
@@ -302,7 +327,6 @@ const styles = StyleSheet.create({
   safe: { flex: 1 },
   closeBtn: {
     position: 'absolute',
-    top: 56,
     left: 20,
     zIndex: 10,
     width: 36,
@@ -312,44 +336,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  closeText: { fontSize: 16, color: Colors.textSecondary, fontWeight: '700' },
+  closeText: { fontSize: fs(16), color: Colors.textSecondary, fontWeight: '700' },
   bubble: {
     position: 'absolute',
     borderRadius: 100,
     backgroundColor: `${Colors.primary}20`,
   },
-  container: {
-    flex: 1,
+  scroll: { flex: 1 },
+  scrollContent: {
+    flexGrow: 1,
     paddingHorizontal: Spacing.lg,
-    paddingTop: 40,
   },
   phaseContainer: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     gap: Spacing.md,
   },
   phaseTitle: {
-    fontSize: 20,
+    fontSize: fs(20),
     fontWeight: '700',
     color: Colors.textPrimary,
     marginTop: Spacing.sm,
   },
   mascot: { marginVertical: Spacing.sm },
   mascotImage: {
-    width: 325,
-    height: 375,
+    ...imageSize(325, 375),
     marginVertical: Spacing.sm,
   },
   infoCard: { width: '100%' },
   readyTitle: {
-    fontSize: 18,
+    fontSize: fs(18),
     fontWeight: '700',
     color: Colors.textPrimary,
     textAlign: 'center',
     marginBottom: 6,
   },
   readySub: {
-    fontSize: 13,
+    fontSize: fs(13),
     color: Colors.textSecondary,
     textAlign: 'center',
     marginBottom: 12,
@@ -365,30 +388,30 @@ const styles = StyleSheet.create({
     gap: 6,
     alignSelf: 'center',
   },
-  amountChipText: { fontSize: 16, fontWeight: '700', color: Colors.primary },
-  amountIcon: { fontSize: 18 },
-  drinkingTitle: { fontSize: 18, fontWeight: '700', color: Colors.textPrimary, textAlign: 'center', marginBottom: 4 },
-  drinkingSub: { fontSize: 13, color: Colors.textSecondary, textAlign: 'center', marginBottom: 12 },
+  amountChipText: { fontSize: fs(16), fontWeight: '700', color: Colors.primary },
+  amountIcon: { fontSize: fs(18) },
+  drinkingTitle: { fontSize: fs(18), fontWeight: '700', color: Colors.textPrimary, textAlign: 'center', marginBottom: 4 },
+  drinkingSub: { fontSize: fs(13), color: Colors.textSecondary, textAlign: 'center', marginBottom: 12 },
   drinkBar: { marginBottom: 12 },
   quote: {
-    fontSize: 13,
+    fontSize: fs(13),
     color: Colors.textSecondary,
     fontStyle: 'italic',
     textAlign: 'center',
     paddingHorizontal: Spacing.md,
-    lineHeight: 20,
+    lineHeight: fs(20),
   },
-  greatJobTitle: { fontSize: 24, fontWeight: '800', color: Colors.textPrimary, marginTop: Spacing.lg },
-  greatJobSub: { fontSize: 14, color: Colors.textSecondary },
+  greatJobTitle: { fontSize: fs(24), fontWeight: '800', color: Colors.textPrimary, marginTop: Spacing.lg },
+  greatJobSub: { fontSize: fs(14), color: Colors.textSecondary },
   addedRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 },
-  dropIcon: { fontSize: 32 },
-  addedAmount: { fontSize: 18, fontWeight: '800', color: Colors.primary },
-  addedSub: { fontSize: 12, color: Colors.textSecondary },
+  dropIcon: { fontSize: fs(32) },
+  addedAmount: { fontSize: fs(18), fontWeight: '800', color: Colors.primary },
+  addedSub: { fontSize: fs(12), color: Colors.textSecondary },
   progressSection: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   progressText: { flex: 1, gap: 4 },
-  progressLabel: { fontSize: 12, color: Colors.textSecondary },
-  progressValue: { fontSize: 18, fontWeight: '700', color: Colors.primary },
-  remaining: { fontSize: 12, color: Colors.textSecondary },
+  progressLabel: { fontSize: fs(12), color: Colors.textSecondary },
+  progressValue: { fontSize: fs(18), fontWeight: '700', color: Colors.primary },
+  remaining: { fontSize: fs(12), color: Colors.textSecondary },
   statsRow: {
     flexDirection: 'row',
     backgroundColor: Colors.surface,
@@ -398,11 +421,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   statItem: { flex: 1, alignItems: 'center', gap: 4 },
-  statIcon: { fontSize: 22 },
-  statValue: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary },
-  statLabel: { fontSize: 10, color: Colors.textSecondary, textAlign: 'center' },
+  statIcon: { fontSize: fs(22) },
+  statValue: { fontSize: fs(18), fontWeight: '800', color: Colors.textPrimary },
+  statLabel: { fontSize: fs(10), color: Colors.textSecondary, textAlign: 'center' },
   statDivider: { width: 1, height: 40, backgroundColor: Colors.border },
   confetti: { position: 'absolute' },
   cta: { width: '100%', marginTop: 'auto' as any, marginBottom: Spacing.lg },
-  smallPct: { fontSize: 14, fontWeight: '700', color: Colors.primary },
+  smallPct: { fontSize: fs(14), fontWeight: '700', color: Colors.primary },
 });

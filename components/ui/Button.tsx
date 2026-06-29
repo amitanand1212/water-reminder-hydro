@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { TouchableOpacity, Text, StyleSheet, ViewStyle, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: fs(16),
     fontWeight: '700',
     letterSpacing: 0.3,
   },
@@ -93,12 +95,12 @@ const styles = StyleSheet.create({
   },
   outlineLabel: {
     color: Colors.primary,
-    fontSize: 16,
+    fontSize: fs(16),
     fontWeight: '600',
   },
   ghostLabel: {
     color: Colors.textSecondary,
-    fontSize: 14,
+    fontSize: fs(14),
     fontWeight: '400',
   },
 });

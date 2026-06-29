@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
@@ -85,24 +87,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
   },
   back: { alignSelf: 'flex-start', marginBottom: Spacing.md },
-  backText: { color: Colors.primary, fontSize: 16, fontWeight: '600' },
-  title: { fontSize: 28, fontWeight: '800', color: Colors.textPrimary },
+  backText: { color: Colors.primary, fontSize: fs(16), fontWeight: '600' },
+  title: { fontSize: fs(28), fontWeight: '800', color: Colors.textPrimary },
   updated: {
-    fontSize: 13,
+    fontSize: fs(13),
     color: Colors.textTertiary,
     marginTop: 4,
     marginBottom: Spacing.lg,
   },
   heading: {
-    fontSize: 16,
+    fontSize: fs(16),
     fontWeight: '700',
     color: Colors.textPrimary,
     marginTop: Spacing.lg,
     marginBottom: Spacing.xs,
   },
   paragraph: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: Colors.textSecondary,
-    lineHeight: 22,
+    lineHeight: fs(22),
   },
 });

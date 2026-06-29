@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { Card } from '../ui/Card';
 import { Colors } from '../../constants/colors';
@@ -25,8 +27,8 @@ export function StreakCard({ streak, longestStreak }: Props) {
 const styles = StyleSheet.create({
   card: { flex: 1 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  fireIcon: { fontSize: 28 },
+  fireIcon: { fontSize: fs(28) },
   info: { gap: 2 },
-  value: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  sub: { fontSize: 11, color: Colors.textSecondary },
+  value: { fontSize: fs(14), fontWeight: '700', color: Colors.textPrimary },
+  sub: { fontSize: fs(11), color: Colors.textSecondary },
 });

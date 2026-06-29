@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { DailyRecord } from '../../types';
 import { ProgressRing } from '../ui/ProgressRing';
@@ -59,11 +61,11 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   ringSection: { alignItems: 'center', gap: 4 },
-  ringPct: { fontSize: 14, fontWeight: '800', color: Colors.primary },
-  ringLabel: { fontSize: 10, color: Colors.textSecondary, fontWeight: '600' },
-  ringValue: { fontSize: 12, color: Colors.primary, fontWeight: '700' },
+  ringPct: { fontSize: fs(14), fontWeight: '800', color: Colors.primary },
+  ringLabel: { fontSize: fs(10), color: Colors.textSecondary, fontWeight: '600' },
+  ringValue: { fontSize: fs(12), color: Colors.primary, fontWeight: '700' },
   statsGrid: { flex: 1, gap: 12 },
   stat: { gap: 2 },
-  statValue: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
-  statLabel: { fontSize: 11, color: Colors.textSecondary },
+  statValue: { fontSize: fs(20), fontWeight: '800', color: Colors.textPrimary },
+  statLabel: { fontSize: fs(11), color: Colors.textSecondary },
 });

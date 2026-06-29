@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { Badge } from '../../types';
 import { Colors } from '../../constants/colors';
@@ -56,14 +58,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iconBgLocked: { backgroundColor: '#E5E5E5' },
-  icon: { fontSize: 24 },
+  icon: { fontSize: fs(24) },
   iconLocked: { opacity: 0.5 },
   name: {
-    fontSize: 11,
+    fontSize: fs(11),
     fontWeight: '600',
     color: Colors.textPrimary,
     textAlign: 'center',
-    lineHeight: 15,
+    lineHeight: fs(15),
   },
   nameLocked: { color: Colors.textTertiary },
   xpChip: {
@@ -72,5 +74,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 2,
   },
-  xpText: { fontSize: 10, fontWeight: '700', color: Colors.xpGold },
+  xpText: { fontSize: fs(10), fontWeight: '700', color: Colors.xpGold },
 });

@@ -12,6 +12,7 @@ import { mlToLitres } from '../../utils/calculations';
 import { calculateLevel } from '../../utils/badges';
 import { Colors } from '../../constants/colors';
 import { Spacing, BorderRadius } from '../../constants/spacing';
+import { fs, imageSize } from '../../utils/responsive';
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
@@ -264,19 +265,18 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xl,
     gap: Spacing.md,
   },
-  headerTitle: { fontSize: 26, fontWeight: '800', color: Colors.textPrimary },
+  headerTitle: { fontSize: fs(26), fontWeight: '800', color: Colors.textPrimary },
   mascotContainer: {
     alignItems: 'center',
     marginTop: -Spacing.sm,
     marginBottom: -Spacing.sm,
   },
   mascotImage: {
-    width: 212,
-    height: 250,
+    ...imageSize(212, 250),
   },
   settingsSection: { gap: Spacing.sm },
   sectionLabel: {
-    fontSize: 12,
+    fontSize: fs(12),
     fontWeight: '700',
     color: Colors.textSecondary,
     textTransform: 'uppercase',

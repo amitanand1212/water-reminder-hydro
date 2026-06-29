@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '../../constants/colors';
@@ -59,12 +61,12 @@ const styles = StyleSheet.create({
   },
   text: { flex: 1 },
   amount: {
-    fontSize: 17,
+    fontSize: fs(17),
     fontWeight: '800',
     color: Colors.textPrimary,
   },
   glasses: {
-    fontSize: 12,
+    fontSize: fs(12),
     color: Colors.textSecondary,
     fontWeight: '400',
   },

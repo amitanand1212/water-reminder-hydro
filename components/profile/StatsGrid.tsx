@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors } from '../../constants/colors';
 import { BorderRadius } from '../../constants/spacing';
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 1,
   },
-  icon: { fontSize: 24 },
-  value: { fontSize: 20, fontWeight: '800', color: Colors.primary },
-  label: { fontSize: 11, color: Colors.textSecondary, textAlign: 'center' },
+  icon: { fontSize: fs(24) },
+  value: { fontSize: fs(20), fontWeight: '800', color: Colors.primary },
+  label: { fontSize: fs(11), color: Colors.textSecondary, textAlign: 'center' },
 });

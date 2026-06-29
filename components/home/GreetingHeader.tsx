@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors } from '../../constants/colors';
 import { Shadow } from '../../constants/spacing';
@@ -40,9 +42,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   left: { flex: 1, gap: 2, paddingRight: 12 },
-  greeting: { fontSize: 24, fontWeight: '800', color: Colors.textPrimary },
-  name: { fontSize: 24, fontWeight: '800', color: Colors.textPrimary },
-  subtitle: { fontSize: 14, color: Colors.textSecondary, marginTop: 2 },
+  greeting: { fontSize: fs(24), fontWeight: '800', color: Colors.textPrimary },
+  name: { fontSize: fs(24), fontWeight: '800', color: Colors.textPrimary },
+  subtitle: { fontSize: fs(14), color: Colors.textSecondary, marginTop: 2 },
   streakCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -54,13 +56,13 @@ const styles = StyleSheet.create({
     ...Shadow.sm,
   },
   streakNumber: {
-    fontSize: 20,
+    fontSize: fs(20),
     fontWeight: '800',
     color: Colors.primary,
-    lineHeight: 22,
+    lineHeight: fs(22),
   },
   streakLabel: {
-    fontSize: 11,
+    fontSize: fs(11),
     fontWeight: '600',
     color: Colors.textPrimary,
   },

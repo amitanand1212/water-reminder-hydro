@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
@@ -89,18 +91,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   back: { alignSelf: 'flex-start', marginBottom: Spacing.md },
-  backText: { color: Colors.primary, fontSize: 16, fontWeight: '600' },
+  backText: { color: Colors.primary, fontSize: fs(16), fontWeight: '600' },
   steps: { marginBottom: Spacing.lg, alignSelf: 'stretch' },
   mascot: { marginBottom: Spacing.md },
   title: {
-    fontSize: 26,
+    fontSize: fs(26),
     fontWeight: '800',
     color: Colors.textPrimary,
     textAlign: 'center',
     marginBottom: Spacing.sm,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: Colors.textSecondary,
     textAlign: 'center',
     marginBottom: Spacing.lg,
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.pill,
   },
   toggleActive: { backgroundColor: Colors.primary },
-  toggleText: { fontSize: 14, fontWeight: '600', color: Colors.textSecondary },
+  toggleText: { fontSize: fs(14), fontWeight: '600', color: Colors.textSecondary },
   toggleTextActive: { color: '#fff' },
   infoCard: {
     backgroundColor: `${Colors.primary}10`,
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing.lg,
     marginBottom: Spacing.lg,
   },
-  infoTitle: { fontSize: 13, fontWeight: '700', color: Colors.primaryDark, marginBottom: 4 },
-  infoText: { fontSize: 12, color: Colors.textSecondary, lineHeight: 18 },
+  infoTitle: { fontSize: fs(13), fontWeight: '700', color: Colors.primaryDark, marginBottom: 4 },
+  infoText: { fontSize: fs(12), color: Colors.textSecondary, lineHeight: fs(18) },
   cta: { width: '100%', marginTop: 'auto' },
 });

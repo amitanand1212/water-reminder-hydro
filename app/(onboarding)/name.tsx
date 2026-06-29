@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
@@ -79,24 +81,24 @@ const styles = StyleSheet.create({
   safe: { flex: 1 },
   kav: { flex: 1, paddingHorizontal: Spacing.lg },
   back: { marginBottom: Spacing.md },
-  backText: { color: Colors.primary, fontSize: 16, fontWeight: '600' },
+  backText: { color: Colors.primary, fontSize: fs(16), fontWeight: '600' },
   steps: { marginBottom: Spacing.xl },
   content: { flex: 1, alignItems: 'center' },
   mascot: { marginBottom: Spacing.lg },
   title: {
-    fontSize: 26,
+    fontSize: fs(26),
     fontWeight: '800',
     color: Colors.textPrimary,
     textAlign: 'center',
-    lineHeight: 34,
+    lineHeight: fs(34),
     marginBottom: Spacing.sm,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: Colors.textSecondary,
     textAlign: 'center',
     marginBottom: Spacing.xl,
-    lineHeight: 21,
+    lineHeight: fs(21),
   },
   inputContainer: {
     flexDirection: 'row',
@@ -112,10 +114,10 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   inputFocused: { borderColor: Colors.primary },
-  inputIcon: { fontSize: 18 },
+  inputIcon: { fontSize: fs(18) },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: fs(16),
     color: Colors.textPrimary,
     fontWeight: '500',
   },
@@ -126,9 +128,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   infoText: {
-    fontSize: 13,
+    fontSize: fs(13),
     color: Colors.primaryDark,
-    lineHeight: 20,
+    lineHeight: fs(20),
   },
   cta: {},
 });

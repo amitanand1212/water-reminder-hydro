@@ -1,6 +1,9 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { Tabs } from 'expo-router';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors } from '../../constants/colors';
 import { Shadow } from '../../constants/spacing';
 import {
@@ -34,11 +37,18 @@ function TabIcon({ Icon, label, focused, filled }: TabIconProps) {
 }
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: styles.tabBar,
+        // Edge-to-edge is on by default (SDK 54), so the app draws behind the
+        // Android navigation bar. Reserve the bottom inset so 3-button nav never
+        // overlaps the tab icons/labels (gesture nav reports ~0 and stays compact).
+        tabBarStyle: [
+          styles.tabBar,
+          { height: 60 + insets.bottom, paddingBottom: insets.bottom },
+        ],
         tabBarShowLabel: false,
         tabBarItemStyle: styles.tabItem,
       }}
@@ -83,8 +93,6 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: Colors.surface,
     borderTopWidth: 0,
-    height: Platform.OS === 'ios' ? 88 : 70,
-    paddingBottom: Platform.OS === 'ios' ? 24 : 10,
     paddingTop: 8,
     ...Shadow.lg,
   },
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: `${Colors.primary}14`,
   },
   label: {
-    fontSize: 11,
+    fontSize: fs(11),
     color: Colors.textTertiary,
     fontWeight: '500',
   },

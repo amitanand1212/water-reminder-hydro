@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors } from '../../constants/colors';
 import { BorderRadius, Shadow } from '../../constants/spacing';
@@ -40,16 +42,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    fontSize: 20,
+    fontSize: fs(20),
   },
   title: {
-    fontSize: 12,
+    fontSize: fs(12),
     fontWeight: '600',
     color: Colors.textPrimary,
     textAlign: 'center',
   },
   subtitle: {
-    fontSize: 10,
+    fontSize: fs(10),
     color: Colors.textSecondary,
     textAlign: 'center',
   },

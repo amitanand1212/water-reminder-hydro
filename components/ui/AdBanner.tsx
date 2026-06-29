@@ -1,4 +1,6 @@
 import React from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, Text, StyleSheet } from 'react-native';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
 
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.04)',
   },
   placeholderText: {
-    fontSize: 11,
+    fontSize: fs(11),
     color: '#9CA3AF',
   },
 });

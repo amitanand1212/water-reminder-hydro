@@ -1,4 +1,6 @@
 import React, { useRef, useCallback } from 'react';
+import { fs } from '../../utils/responsive';
+
 import { View, ScrollView, Text, StyleSheet, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { Colors } from '../../constants/colors';
 
@@ -103,17 +105,17 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   itemText: {
-    fontSize: 20,
+    fontSize: fs(20),
     color: Colors.textSecondary,
     fontWeight: '400',
   },
   selectedText: {
-    fontSize: 28,
+    fontSize: fs(28),
     color: Colors.primary,
     fontWeight: '700',
   },
   unitLabel: {
-    fontSize: 16,
+    fontSize: fs(16),
     color: Colors.primary,
     fontWeight: '600',
     marginTop: 4,

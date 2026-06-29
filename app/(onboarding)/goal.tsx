@@ -11,6 +11,7 @@ import { goalFromWeightKg } from '../../utils/calculations';
 import { requestNotificationPermissions, scheduleHydrationNotifications } from '../../utils/notifications';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
+import { fs, imageSize } from '../../utils/responsive';
 
 export default function GoalScreen() {
   const insets = useSafeAreaInsets();
@@ -88,19 +89,18 @@ const styles = StyleSheet.create({
   steps: { marginBottom: Spacing.lg, alignSelf: 'stretch' },
   mascot: { marginBottom: Spacing.md },
   mascotImage: {
-    width: 250,
-    height: 300,
+    ...imageSize(250, 300),
     marginBottom: Spacing.md,
   },
   title: {
-    fontSize: 26,
+    fontSize: fs(26),
     fontWeight: '800',
     color: Colors.textPrimary,
     textAlign: 'center',
     marginBottom: Spacing.sm,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: fs(14),
     color: Colors.textSecondary,
     textAlign: 'center',
     marginBottom: Spacing.lg,
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xl,
   },
   feature: { alignItems: 'center', gap: 6, flex: 1 },
-  featureIcon: { fontSize: 28 },
-  featureLabel: { fontSize: 12, fontWeight: '600', color: Colors.textSecondary, textAlign: 'center' },
+  featureIcon: { fontSize: fs(28) },
+  featureLabel: { fontSize: fs(12), fontWeight: '600', color: Colors.textSecondary, textAlign: 'center' },
   cta: { width: '100%', marginBottom: Spacing.md },
-  note: { fontSize: 12, color: Colors.textTertiary, textAlign: 'center' },
+  note: { fontSize: fs(12), color: Colors.textTertiary, textAlign: 'center' },
 });
